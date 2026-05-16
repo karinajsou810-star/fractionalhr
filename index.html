@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karina Souza — Fractional HR Manager</title>
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #f5f4f1;
+    --warm-grey: #e8e6e1;
+    --mid-grey: #9a9690;
+    --accent: #2d2d2d;
+    --purple: #6b4fbb;
+    --purple-light: #8b6fd4;
+    --text: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(245,244,241,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--warm-grey);
+    padding: 0 48px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+
+  nav .logo {
+    font-family: 'Georgia', serif;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    color: var(--black);
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--mid-grey);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  nav .nav-links a:hover { color: var(--black); }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 60px;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 80px;
+  }
+
+  .hero-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 24px;
+  }
+
+  .hero-name {
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: normal;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--mid-grey);
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-statement {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--accent);
+    max-width: 480px;
+    margin-bottom: 48px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    color: var(--mid-grey);
+    margin-bottom: 48px;
+  }
+
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  .cta-group { display: flex; gap: 16px; align-items: center; }
+
+  .btn-primary {
+    background: var(--purple);
+    color: white;
+    padding: 14px 28px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-primary:hover { background: var(--purple-light); }
+
+  .btn-secondary {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    color: var(--mid-grey);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--black); }
+
+  .hero-photo { position: relative; overflow: hidden; background: var(--warm-grey); }
+
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .photo-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(10,10,10,0.3), transparent);
+  }
+
+  .positioning-strip {
+    background: var(--black);
+    color: white;
+    padding: 24px 80px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    overflow-x: auto;
+  }
+
+  .strip-item { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+  .strip-dot { width: 6px; height: 6px; background: var(--purple-light); border-radius: 50%; flex-shrink: 0; }
+  .strip-label { color: #888; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .strip-value { color: white; font-weight: 500; }
+
+  section { padding: 100px 80px; }
+
+  .section-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: normal;
+    line-height: 1.2;
+    color: var(--black);
+    margin-bottom: 48px;
+    max-width: 640px;
+  }
+
+  .who-section { background: white; }
+
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+  .who-statement { font-size: 22px; line-height: 1.6; color: var(--accent); }
+
+  .who-markers { display: flex; flex-direction: column; gap: 0; }
+
+  .who-marker {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--warm-grey);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .who-marker:first-child { border-top: 1px solid var(--warm-grey); }
+
+  .marker-icon {
+    width: 36px; height: 36px;
+    background: var(--purple);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 16px; flex-shrink: 0; margin-top: 2px;
+  }
+
+  .marker-text h4 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 4px;
+  }
+
+  .marker-text p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px; color: var(--mid-grey); line-height: 1.5;
+  }
+
+  .cases-section { background: var(--off-white); }
+
+  .case-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+
+  .case-card { background: white; padding: 48px; position: relative; transition: transform 0.2s; }
+  .case-card:hover { transform: translateY(-4px); }
+
+  .case-number {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--mid-grey); margin-bottom: 16px;
+  }
+
+  .case-title { font-size: 20px; line-height: 1.3; color: var(--black); margin-bottom: 24px; }
+
+  .case-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+
+  .case-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px; background: var(--warm-grey); color: var(--accent);
+    padding: 4px 12px; letter-spacing: 0.02em;
+  }
+
+  .case-blocks { display: flex; flex-direction: column; gap: 20px; }
+
+  .case-block h4 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 8px;
+  }
+
+  .case-block p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px; color: var(--accent); line-height: 1.6;
+  }
+
+  .result-bar { margin-top: 32px; padding: 20px 24px; background: var(--black); color: white; }
+
+  .result-bar .result-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--purple-light); margin-bottom: 6px;
+  }
+
+  .result-bar .result-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px; color: white; line-height: 1.5;
+  }
+
+  .approach-section { background: var(--black); color: white; }
+  .approach-section .section-label { color: var(--purple-light); }
+  .approach-section .section-title { color: white; }
+
+  .approach-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+
+  .step { background: #111; padding: 40px 32px; }
+
+  .step-number { font-size: 48px; font-weight: normal; color: #222; line-height: 1; margin-bottom: 20px; }
+
+  .step h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px; font-weight: 600; color: white; margin-bottom: 12px;
+  }
+
+  .step p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px; color: #888; line-height: 1.6;
+  }
+
+  .experience-section { background: white; }
+
+  .exp-grid { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 180px;
+    gap: 40px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--warm-grey);
+    align-items: baseline;
+  }
+
+  .exp-row:first-child { border-top: 1px solid var(--warm-grey); }
+
+  .exp-period {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px; color: var(--mid-grey); letter-spacing: 0.03em;
+  }
+
+  .exp-role {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 4px;
+  }
+
+  .exp-org {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px; color: var(--mid-grey);
+  }
+
+  .exp-context {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px; color: var(--mid-grey); font-style: italic;
+    margin-top: 4px; line-height: 1.5;
+  }
+
+  .exp-type {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple); text-align: right;
+  }
+
+  .rates-section { background: var(--off-white); border-top: 1px solid var(--warm-grey); }
+
+  .rates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+  .rate-card { background: white; padding: 48px; }
+
+  .rate-amount { font-size: 56px; font-weight: normal; color: var(--black); line-height: 1; margin-bottom: 8px; }
+
+  .rate-basis {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px; color: var(--mid-grey); margin-bottom: 28px;
+  }
+
+  .rate-includes h4 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 16px;
+  }
+
+  .rate-includes ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .rate-includes li {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px; color: var(--accent);
+    display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
+  }
+
+  .rate-includes li::before { content: '—'; color: var(--purple); flex-shrink: 0; margin-top: 1px; }
+
+  .availability-block { display: flex; flex-direction: column; gap: 24px; }
+
+  .avail-item { display: flex; flex-direction: column; gap: 6px; }
+
+  .avail-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid-grey);
+  }
+
+  .avail-value {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px; color: var(--black); font-weight: 500;
+  }
+
+  .avail-detail {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px; color: var(--mid-grey); line-height: 1.5;
+  }
+
+  .contact-section { background: var(--black); color: white; text-align: center; padding: 120px 80px; }
+  .contact-section .section-label { color: var(--purple-light); }
+
+  .contact-title { font-size: clamp(32px, 4vw, 52px); font-weight: normal; color: white; margin-bottom: 24px; line-height: 1.2; }
+
+  .contact-sub {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px; color: #888; max-width: 520px; margin: 0 auto 48px; line-height: 1.6;
+  }
+
+  .contact-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+
+  .contact-link { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; transition: opacity 0.2s; }
+  .contact-link:hover { opacity: 0.7; }
+
+  .contact-link .cl-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #555;
+  }
+
+  .contact-link .cl-value {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px; color: white; font-weight: 500;
+  }
+
+  footer {
+    background: var(--black);
+    border-top: 1px solid #1a1a1a;
+    padding: 24px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  footer span { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 12px; color: #444; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-photo { height: 60vw; }
+    .hero-text { padding: 60px 32px; }
+    section { padding: 60px 32px; }
+    .who-grid, .case-cards, .rates-grid { grid-template-columns: 1fr; gap: 32px; }
+    .approach-steps { grid-template-columns: 1fr 1fr; }
+    .exp-row { grid-template-columns: 1fr; gap: 4px; }
+    .exp-type { text-align: left; }
+    nav { padding: 0 24px; }
+    .positioning-strip { padding: 20px 32px; }
+    footer { padding: 20px 32px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">Karina Souza</span>
+  <ul class="nav-links">
+    <li><a href="#who">Who this is for</a></li>
+    <li><a href="#cases">Case studies</a></li>
+    <li><a href="#approach">How I work</a></li>
+    <li><a href="#rates">Rates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-tag">Fractional HR · Available now</div>
+    <h1 class="hero-name">Karina<br>Souza</h1>
+    <p class="hero-title">Fractional HR Manager</p>
+    <p class="hero-statement">I build HR systems for small businesses that don't have one yet. Recruiting, onboarding, scheduling, vendor coordination. When I leave, it runs without me.</p>
+    <div class="hero-meta">
+      <span>📍 Lisbon, PT</span>
+      <span>🌍 Remote</span>
+      <span>⏱ $400 / day</span>
+      <span>📅 WET timezone</span>
+    </div>
+    <div class="cta-group">
+      <a href="#contact" class="btn-primary">Start a conversation</a>
+      <a href="#cases" class="btn-secondary">See the work →</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img src="photo.jpg" alt="Karina Souza">
+    <div class="photo-overlay"></div>
+  </div>
+</section>
+
+<div class="positioning-strip">
+  <div class="strip-item"><div class="strip-dot"></div><div><div class="strip-label">Specialty</div><div class="strip-value">HR Operations Build-outs</div></div></div>
+  <div class="strip-item"><div class="strip-dot"></div><div><div class="strip-label">Best fit</div><div class="strip-value">SMEs · 3–50 people</div></div></div>
+  <div class="strip-item"><div class="strip-dot"></div><div><div class="strip-label">Track record</div><div class="strip-value">Zero coverage gaps over 7 years</div></div></div>
+  <div class="strip-item"><div class="strip-dot"></div><div><div class="strip-label">Languages</div><div class="strip-value">English · Portuguese · Spanish</div></div></div>
+</div>
+
+<section id="who" class="who-section">
+  <div class="section-label">Who this is for</div>
+  <div class="who-grid">
+    <div>
+      <h2 class="section-title">Founders who need a people function — not a full-time hire to build one.</h2>
+      <p class="who-statement">I work with founders and operators of scaling companies who are making people decisions without the infrastructure to support them. No HR system. No documentation. No one accountable for it. I build the function, hand it off, and you run it without me in the room.</p>
+    </div>
+    <div class="who-markers">
+      <div class="who-marker"><div class="marker-icon">✓</div><div class="marker-text"><h4>Scaling without HR infrastructure</h4><p>Hiring is happening, vendors are being added, and the team is growing — but there's no process holding any of it together.</p></div></div>
+      <div class="who-marker"><div class="marker-icon">✓</div><div class="marker-text"><h4>People decisions made on instinct</h4><p>No structured recruiting. No onboarding that repeats. No performance criteria for contractors. Every decision starts from scratch.</p></div></div>
+      <div class="who-marker"><div class="marker-icon">✓</div><div class="marker-text"><h4>You are the HR function</h4><p>People decisions — who to hire, what to pay, when to let someone go — land on you, between everything else. There's no one else in the room and no process to fall back on.</p></div></div>
+      <div class="who-marker"><div class="marker-icon">✓</div><div class="marker-text"><h4>Off-site or remote leadership</h4><p>Operations need to run without constant check-ins. You need documentation and systems that give you visibility without requiring your presence.</p></div></div>
+      <div class="who-marker"><div class="marker-icon">✗</div><div class="marker-text"><h4>Not a fit if...</h4><p>You need a permanent HR generalist embedded in daily operations, payroll administration, or legal employment compliance work.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="cases" class="cases-section">
+  <div class="section-label">Case studies</div>
+  <h2 class="section-title">Two engagements. Two different problems. Same approach.</h2>
+  <div class="case-cards">
+    <div class="case-card">
+      <div class="case-number">Case study 01</div>
+      <h3 class="case-title">When every consultant has their own system, nothing can scale</h3>
+      <div class="case-meta"><span class="case-tag">Professional services</span><span class="case-tag">SME</span><span class="case-tag">Feb–Nov 2022</span></div>
+      <div class="case-blocks">
+        <div class="case-block"><h4>What was broken</h4><p>Recruiting was happening — but every person doing it followed their own version of the process. No shared documentation. No standard for what a candidate profile should contain. No way to onboard a new consultant without losing weeks of handholding. The practice couldn't grow because the knowledge lived in people's heads, not in a system.</p></div>
+        <div class="case-block"><h4>What I built</h4><p>A three-phase recruiting model. A ten-category candidate profile template. A three-channel sourcing approach. A four-touchpoint post-placement follow-up sequence. Packaged as an internal training document and a client-facing version.</p></div>
+      </div>
+      <div class="result-bar"><div class="result-label">Outcome</div><div class="result-text">New consultants could follow the full process from day one — no shadow period, no senior consultant required to walk them through it. Onboarding time for new recruiting staff dropped to zero ramp-up on process.</div></div>
+    </div>
+    <div class="case-card">
+      <div class="case-number">Case study 02</div>
+      <h3 class="case-title">Seven years, zero coverage gaps: building a people function that runs without the founder</h3>
+      <div class="case-meta"><span class="case-tag">Private services</span><span class="case-tag">3 staff + 7 vendors</span><span class="case-tag">2018–2025</span></div>
+      <div class="case-blocks">
+        <div class="case-block"><h4>What was broken</h4><p>Leadership worked off-site. The operation ran on three permanent staff and seven external vendors, with no documentation, no structured onboarding, and no visibility into scheduling, vendor performance, or budget from a distance. People decisions were made informally. Vendor relationships had no criteria — no way to evaluate performance, no threshold for when to end a contract. When something went wrong, it went to the founder. There was no system to prevent that.</p></div>
+        <div class="case-block"><h4>What I built</h4><p>A three-document onboarding kit covering shift schedules, role-specific operational profiles, and contractor coordination — enabling full operational readiness from day one for any new hire. An integrated tracker consolidating team scheduling, vendor coordination, and budget monitoring into a single source of truth accessible to off-site leadership in real time. Formal performance criteria for all seven external vendors, including defined termination thresholds, so vendor decisions were based on documented standards rather than judgment calls. A structured recruitment process — screening 15 candidates over the engagement period, selecting three recurring placements that became reliable annual leave coverage for each permanent team member.</p></div>
+      </div>
+      <div class="result-bar"><div class="result-label">Outcome</div><div class="result-text">50% efficiency gain in workflow management. Zero coverage gaps across seven years. Leadership could see operational status in real time, remotely, without asking anyone. The people function ran without their involvement in day-to-day decisions.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="approach" class="approach-section">
+  <div class="section-label">How I work</div>
+  <h2 class="section-title">A defined scope. A named deliverable. No open-ended retainers.</h2>
+  <div class="approach-steps">
+    <div class="step"><div class="step-number">01</div><h3>Scope conversation</h3><p>We define the problem, the deliverable, and the timeline upfront. No ambiguity about what done looks like.</p></div>
+    <div class="step"><div class="step-number">02</div><h3>Audit and diagnose</h3><p>I look at what exists — even if it's just habits and spreadsheets. The diagnosis shapes the build.</p></div>
+    <div class="step"><div class="step-number">03</div><h3>Build and document</h3><p>Systems, templates, trackers, and processes. Everything documented so it doesn't depend on me being there.</p></div>
+    <div class="step"><div class="step-number">04</div><h3>Hand off and close</h3><p>I train whoever needs to use it. Then I leave. That's the point.</p></div>
+  </div>
+</section>
+
+<section id="experience" class="experience-section">
+  <div class="section-label">Experience</div>
+  <h2 class="section-title">Eight years across HR operations, talent acquisition, and people management.</h2>
+  <div class="exp-grid">
+    <div class="exp-row"><div class="exp-period">2018 – 2025</div><div><div class="exp-role">HR & People Operations Manager</div><div class="exp-org">Private services company · Lisbon, Portugal</div><div class="exp-context">Seven years building and running a people function for off-site leadership — from scratch, without a dedicated HR team.</div></div><div class="exp-type">7-year fractional engagement</div></div>
+    <div class="exp-row"><div class="exp-period">2022 – 2023</div><div><div class="exp-role">Talent Acquisition & HR Coordinator</div><div class="exp-org">IEFP – Institute for Employment & Vocational Training</div><div class="exp-context">High-volume recruiting at pace — screening 25–30 profiles daily, moving candidates from intake to placed status within the same working day.</div></div><div class="exp-type">Fixed term</div></div>
+    <div class="exp-row"><div class="exp-period">2019 – 2022</div><div><div class="exp-role">HR & People Operations Coordinator</div><div class="exp-org">Riviera Center · Portugal</div><div class="exp-context">Brought scheduling and communication structure to an operation that had none — zero coverage gaps across three years.</div></div><div class="exp-type">Full time</div></div>
+    <div class="exp-row"><div class="exp-period">2017 – 2019</div><div><div class="exp-role">HR Administration Assistant</div><div class="exp-org">Spark Elétrica Ltda · Brazil</div><div class="exp-context">Built the HR function from nothing at a four-person company — documentation, data systems, and vendor coordination rebuilt from the ground up.</div></div><div class="exp-type">Full time</div></div>
+    <div class="exp-row"><div class="exp-period">2024</div><div><div class="exp-role">Bachelor's — Human Relations & Organizational Communication</div><div class="exp-org">Polytechnic of Leiria · Portugal</div></div><div class="exp-type">Education</div></div>
+  </div>
+</section>
+
+<section id="rates" class="rates-section">
+  <div class="section-label">Rates & availability</div>
+  <h2 class="section-title">Straightforward pricing. No retainer required to start.</h2>
+  <div class="rates-grid">
+    <div class="rate-card">
+      <div class="rate-amount">$400</div>
+      <div class="rate-basis">per day · based on an 8-hour day</div>
+      <div class="rate-includes">
+        <h4>What's included</h4>
+        <ul>
+          <li>Scoping and diagnostic work</li>
+          <li>Systems design and build</li>
+          <li>Documentation and templates</li>
+          <li>Handoff and training session</li>
+          <li>Defined client hours, no ad hoc check-ins</li>
+        </ul>
+      </div>
+    </div>
+    <div class="availability-block">
+      <div class="avail-item"><div class="avail-label">Timezone</div><div class="avail-value">Western European Time (WET/WEST)</div><div class="avail-detail">Lisbon, Portugal. Available for synchronous work during European and early US East Coast hours.</div></div>
+      <div class="avail-item"><div class="avail-label">Languages</div><div class="avail-value">English · Portuguese · Spanish</div><div class="avail-detail">French at B2 level. All client work delivered in English or Portuguese.</div></div>
+      <div class="avail-item"><div class="avail-label">Engagement type</div><div class="avail-value">Project-based · Fractional · Remote</div><div class="avail-detail">Short and mid-term engagements. No geographic restrictions.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="section-label">Get in touch</div>
+  <h2 class="contact-title">If the problem fits,<br>let's talk scope.</h2>
+  <p class="contact-sub">No pitch decks. Tell me what's broken and what you need built. We'll take it from there.</p>
+  <div class="contact-links">
+    <a href="mailto:karinajsou810@gmail.com" class="contact-link"><span class="cl-label">Email</span><span class="cl-value">karinajsou810@gmail.com</span></a>
+    <a href="https://www.linkedin.com/in/karina-souza" class="contact-link" target="_blank"><span class="cl-label">LinkedIn</span><span class="cl-value">linkedin.com/in/karina-souza</span></a>
+    <a href="#" class="contact-link"><span class="cl-label">Timezone</span><span class="cl-value">Lisbon · WET</span></a>
+  </div>
+</section>
+
+<footer>
+  <span>Karina Souza · Fractional HR Manager · Lisbon, Portugal</span>
+  <span>Available via Fractionus · 2026</span>
+</footer>
+
+</body>
+</html>
